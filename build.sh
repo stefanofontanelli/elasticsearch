@@ -6,6 +6,7 @@ set -o pipefail
 [ $# -ne 1 ] && echo "usage: ./build.sh <version>" && exit 1
 VERSION="$1"
 MAJOR=${VERSION%%??}  # clearly.
+mkdir -p "$MAJOR"
 sed 's/%%VERSION%%/'"$VERSION"'/g' Dockerfile.template > "$MAJOR"/Dockerfile
 
 pushd "$MAJOR"
