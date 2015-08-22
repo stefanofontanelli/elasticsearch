@@ -1,4 +1,5 @@
 FROM java:8-jre
+VOLUME ["/usr/share/elasticsearch/config", "/usr/share/elasticsearch/data"]
 
 # grab gosu for easy step-down from root
 RUN gpg --keyserver ha.pool.sks-keyservers.net --recv-keys B42F6819007F00F88E364FD4036A9C25BF357DD4
@@ -25,7 +26,10 @@ RUN set -x \
 ENV PATH /usr/share/elasticsearch/bin:$PATH
 COPY config /usr/share/elasticsearch/config
 
-VOLUME /usr/share/elasticsearch/data
+RUN /usr/share/elasticsearch/bin/plugin -install elasticsearch/elasticsearch-cloud-aws/2.4.1 \
+    && /usr/share/elasticsearch/bin/plugin -install mobz/elasticsearch-head \
+    && /usr/share/elasticsearch/bin/plugin -install lukas-vlcek/bigdesk \
+    && /usr/share/elasticsearch/bin/plugin -install elasticsearch/elasticsearch-analysis-icu/2.4.2
 
 COPY docker-entrypoint.sh /
 
