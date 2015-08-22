@@ -7,7 +7,7 @@ set -o pipefail
 VERSION="$1"
 MAJOR=${VERSION%%??}  # clearly.
 mkdir -p "$MAJOR"
-sed 's/%%VERSION%%/'"$VERSION"'/g' Dockerfile.template > "$MAJOR"/Dockerfile
+sed -e 's/%%ELASTICSEARCH_VERSION%%/'"$VERSION"'/g' -e 's/%%ELASTICSEARCH_MAJOR%%/'"$MAJOR"'/g' Dockerfile.template > "$MAJOR"/Dockerfile
 
 pushd "$MAJOR"
 docker build --no-cache=true -t stefanofontanelli/elasticsearch .
