@@ -10,7 +10,5 @@ mkdir -p "$MAJOR"
 sed -e 's/%%ELASTICSEARCH_VERSION%%/'"$VERSION"'/g' -e 's/%%ELASTICSEARCH_MAJOR%%/'"$MAJOR"'/g' Dockerfile.template > "$MAJOR"/Dockerfile
 
 pushd "$MAJOR"
-docker build --no-cache=true -t stefanofontanelli/elasticsearch .
-docker tag -f stefanofontanelli/elasticsearch:latest stefanofontanelli/elasticsearch:"$VERSION"
-docker push stefanofontanelli/elasticsearch:latest
-docker push stefanofontanelli/elasticsearch:"$VERSION"
+docker build --no-cache=true -t gild/elasticsearch:"$VERSION" .
+docker push gild/elasticsearch:"$VERSION"
