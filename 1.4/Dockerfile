@@ -25,7 +25,19 @@ RUN set -x \
 	&& rm -rf /var/lib/apt/lists/*
 
 ENV PATH /usr/share/elasticsearch/bin:$PATH
-COPY config /usr/share/elasticsearch/config
+
+RUN set -ex \
+	&& for path in \
+		/usr/share/elasticsearch/data \
+		/usr/share/elasticsearch/logs \
+		/usr/share/elasticsearch/config \
+		/usr/share/elasticsearch/config/scripts \
+	; do \
+		mkdir -p "$path"; \
+		chown -R elasticsearch:elasticsearch "$path"; \
+	done
+
+COPY config/logging.yml /usr/share/elasticsearch/config/
 
 RUN /usr/share/elasticsearch/bin/plugin -install elasticsearch/elasticsearch-cloud-aws/2.4.1 \
     && /usr/share/elasticsearch/bin/plugin -install mobz/elasticsearch-head \
