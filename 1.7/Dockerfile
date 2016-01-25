@@ -43,7 +43,7 @@ RUN 	 /usr/share/elasticsearch/bin/plugin -install elasticsearch/elasticsearch-c
 		&& /usr/share/elasticsearch/bin/plugin -install elasticsearch/elasticsearch-analysis-phonetic/2.7.0 \
     && /usr/share/elasticsearch/bin/plugin -install mobz/elasticsearch-head \
     && /usr/share/elasticsearch/bin/plugin -install lukas-vlcek/bigdesk \
-		&& /usr/share/elasticsearch/bin/plugin -install elasticsearch/kopf/1.6.1
+		&& /usr/share/elasticsearch/bin/plugin -install lmenezes/elasticsearch-kopf/1.6.1
 
 COPY docker-entrypoint.sh /
 
