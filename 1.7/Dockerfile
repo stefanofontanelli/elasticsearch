@@ -38,7 +38,7 @@ RUN set -ex \
 
 COPY config/logging.yml /usr/share/elasticsearch/config/
 
-RUN 	 /usr/share/elasticsearch/bin/plugin -install elasticsearch/elasticsearch-cloud-aws/2.4.1 \
+RUN 	 /usr/share/elasticsearch/bin/plugin -install elasticsearch/elasticsearch-cloud-aws/2.7.1 \
 		&& /usr/share/elasticsearch/bin/plugin -install elasticsearch/elasticsearch-analysis-icu/2.5.0 \
 		&& /usr/share/elasticsearch/bin/plugin -install elasticsearch/elasticsearch-analysis-phonetic/2.7.0 \
     && /usr/share/elasticsearch/bin/plugin -install mobz/elasticsearch-head \
