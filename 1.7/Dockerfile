@@ -14,7 +14,7 @@ RUN arch="$(dpkg --print-architecture)" \
 RUN apt-key adv --keyserver ha.pool.sks-keyservers.net --recv-keys 46095ACC8548582C1A2699A9D27D666CD88E42B4
 
 ENV ELASTICSEARCH_MAJOR 1.7
-ENV ELASTICSEARCH_VERSION 1.7.2
+ENV ELASTICSEARCH_VERSION 1.7.5
 
 RUN echo "deb http://packages.elasticsearch.org/elasticsearch/$ELASTICSEARCH_MAJOR/debian stable main" > /etc/apt/sources.list.d/elasticsearch.list
 
