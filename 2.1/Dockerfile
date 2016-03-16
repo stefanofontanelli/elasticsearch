@@ -1,5 +1,4 @@
 FROM java:8-jre
-VOLUME ["/usr/share/elasticsearch/config", "/usr/share/elasticsearch/data"]
 
 # grab gosu for easy step-down from root
 ENV GOSU_VERSION 1.7
@@ -17,9 +16,9 @@ RUN set -x \
 # https://packages.elasticsearch.org/GPG-KEY-elasticsearch
 RUN apt-key adv --keyserver ha.pool.sks-keyservers.net --recv-keys 46095ACC8548582C1A2699A9D27D666CD88E42B4
 
-ENV ELASTICSEARCH_MAJOR %%ELASTICSEARCH_MAJOR%%
-ENV ELASTICSEARCH_VERSION %%ELASTICSEARCH_VERSION%%
-ENV ELASTICSEARCH_REPO_BASE %%ELASTICSEARCH_REPO_BASE%%
+ENV ELASTICSEARCH_MAJOR 2.1
+ENV ELASTICSEARCH_VERSION 2.1.2
+ENV ELASTICSEARCH_REPO_BASE http://packages.elasticsearch.org/elasticsearch/2.x/debian
 
 RUN echo "deb $ELASTICSEARCH_REPO_BASE stable main" > /etc/apt/sources.list.d/elasticsearch.list
 
@@ -45,10 +44,7 @@ RUN set -ex \
 
 COPY config ./config
 
-RUN /usr/share/elasticsearch/bin/plugin -install elasticsearch/elasticsearch-cloud-aws/2.7.1 \
-    && /usr/share/elasticsearch/bin/plugin -install mobz/elasticsearch-head \
-    && /usr/share/elasticsearch/bin/plugin -install lukas-vlcek/bigdesk \
-    && /usr/share/elasticsearch/bin/plugin -install elasticsearch/elasticsearch-analysis-icu/2.5.0
+VOLUME /usr/share/elasticsearch/data
 
 COPY docker-entrypoint.sh /
 
